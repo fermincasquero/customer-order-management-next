@@ -1,9 +1,6 @@
 import mongoose from "mongoose";
 
-const { MONGODB_URI, MONGODB_DB } = process.env;
-
-if (!MONGODB_URI) throw new Error("MONGODB_URI not defined");
-if (!MONGODB_DB) throw new Error("MONGODB_DB not defined");
+const DB_URL = process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/cms";
 
 let cached = global.mongoose;
 
@@ -15,7 +12,7 @@ async function dbConnect() {
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
-    cached.promise = mongoose.connect(`${MONGODB_URI}/${MONGODB_DB}`).then((mongoose) => mongoose);
+    cached.promise = mongoose.connect(DB_URL).then((mongoose) => mongoose);
   }
 
   cached.conn = await cached.promise;
