@@ -7,7 +7,7 @@ export async function GET(request: NextRequest, { params }: any) {
 
   const id = params.id;
 
-  const customer = await Customer.findById(id);
+  const customer = await Customer.findById(id).populate("orders");
 
   return NextResponse.json(customer);
 }

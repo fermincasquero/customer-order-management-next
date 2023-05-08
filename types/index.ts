@@ -6,6 +6,7 @@ export type Customer = {
 };
 
 export type Order = {
+  id: string;
   items: { name: string; count: number }[];
   dateOrdered: string;
   dateCompleted: string | null;

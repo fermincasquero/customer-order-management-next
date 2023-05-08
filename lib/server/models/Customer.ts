@@ -1,4 +1,5 @@
 import { Schema, model, models } from "mongoose";
+import Order from "./Order";
 
 const customerSchema = new Schema(
   {
@@ -20,6 +21,13 @@ const customerSchema = new Schema(
   }
 );
 
+customerSchema.virtual("orders", {
+  ref: "Order",
+  localField: "_id",
+  foreignField: "customer",
+});
+
+models.Order = Order;
 const Customer = models.Customer || model("Customer", customerSchema);
 
 export default Customer;
