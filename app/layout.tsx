@@ -1,8 +1,7 @@
-import Layout from "@/lib/components/layout";
+import { Container } from "@/lib/mui/material";
+import Navbar from "@/lib/components/navbar";
+import { MuiSetup } from "./MuiSetup";
 import "./globals.css";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -12,8 +11,12 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Layout>{children}</Layout>
+      <body>
+        <MuiSetup>
+          <Navbar />
+
+          <Container>{children}</Container>
+        </MuiSetup>
       </body>
     </html>
   );
