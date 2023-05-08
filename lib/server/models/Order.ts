@@ -11,7 +11,7 @@ const orderSchema = new Schema(
       type: [{ name: String, count: Number }],
     },
     dateOrdered: { type: Date, required: true },
-    dateCompleted: { type: Date, required: true },
+    dateCompleted: { type: Date },
   },
   {
     toJSON: {

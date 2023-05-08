@@ -11,3 +11,11 @@ export default function useCustomers() {
     return response.data;
   });
 }
+
+export function useCustomer(id: string) {
+  return useSWR(["/api/customers", id], async () => {
+    const response = await Axios.get<Customer>(`/api/customers/${id}`);
+
+    return response.data;
+  });
+}
