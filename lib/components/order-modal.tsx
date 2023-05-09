@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import Add from "@mui/icons-material/Add";
 import { Controller, useForm } from "react-hook-form";
 import { Customer, Order } from "@/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Autocomplete, Stack, Typography } from "@mui/material";
 import useCustomers from "../hooks/useCustomers";
 import { Remove } from "@mui/icons-material";
@@ -21,15 +21,18 @@ type Props = {
 };
 
 export default function OrderModal({ open, onClose, customer }: Props) {
-  const { orders, ...rest } = customer || {};
-
-  const { handleSubmit, register, watch, setValue, control } = useForm<Order>({
-    defaultValues: { customer: rest },
-  });
+  const { handleSubmit, register, watch, setValue, control, resetField } = useForm<Order>({});
   const [itemName, setItemName] = useState("");
   const [itemCount, setItemCount] = useState(0);
 
   const { data } = useCustomers();
+
+  useEffect(() => {
+    if (customer) {
+      const { orders, ...rest } = customer;
+      resetField("customer", { defaultValue: rest });
+    }
+  }, [customer]);
 
   const items = watch("items") || [];
 
@@ -39,7 +42,7 @@ export default function OrderModal({ open, onClose, customer }: Props) {
     if (customer) {
       mutate(["/api/customers", customer.id]);
     }
-    mutate(["/api/orders"]);
+    mutate("/api/orders");
 
     onClose();
   };

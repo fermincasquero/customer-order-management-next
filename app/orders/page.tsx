@@ -1,17 +1,20 @@
 "use client";
 
-import { Box, IconButton, Stack, Typography } from "@/lib/mui/material";
+import { Avatar, Box, Button, IconButton, Stack, Typography } from "@/lib/mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import dayjs from "dayjs";
-import { Delete, Visibility } from "@mui/icons-material";
+import { Add, Delete, Visibility } from "@mui/icons-material";
 import Link from "next/link";
 import { mutate } from "swr";
 import Axios from "axios";
 import useOrders from "@/lib/hooks/useOrders";
+import OrderModal from "@/lib/components/order-modal";
 
 export default function Customers() {
   const { data } = useOrders();
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleDelete = (id: string) => async () => {
     await Axios.delete(`/api/orders/${id}`);
@@ -77,13 +80,19 @@ export default function Customers() {
     <Box>
       <Stack direction="row" justifyContent="space-between" alignItems="center" mt={4}>
         <Typography variant="h6">Orders</Typography>
+
+        <Button onClick={() => setModalOpen(true)} color="primary" variant="contained">
+          <Add />
+        </Button>
       </Stack>
 
       {data?.length ? (
-        <DataGrid columns={columns} rows={data} getRowId={(row) => row.id} rowSelection={false} />
+        <DataGrid columns={columns} rows={data} getRowId={(row) => row.id} rowSelection={false} sx={{ mt: 2 }} />
       ) : (
         <Typography mt={2}>No Orders</Typography>
       )}
+
+      {modalOpen ? <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} /> : null}
     </Box>
   );
 }
