@@ -38,7 +38,7 @@ export default function CustomersTable({ items }: Props) {
         renderCell: ({ value }) => {
           return (
             <Stack direction="row" justifyContent="center">
-              <IconButton component={Link} href={`/customers/${value}`}>
+              <IconButton component={Link} href={`/customers/${value}`} prefetch={false}>
                 <Visibility />
               </IconButton>
 

@@ -59,7 +59,7 @@ export default function Customers() {
         renderCell: ({ value }) => {
           return (
             <Stack direction="row" justifyContent="center">
-              <IconButton component={Link} href={`/orders/${value}`}>
+              <IconButton component={Link} href={`/orders/${value}`} prefetch={false}>
                 <Visibility />
               </IconButton>
 
