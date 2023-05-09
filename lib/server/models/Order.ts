@@ -1,4 +1,5 @@
 import { Schema, model, models } from "mongoose";
+import Customer from "./Customer";
 
 const orderSchema = new Schema(
   {
@@ -10,8 +11,8 @@ const orderSchema = new Schema(
     items: {
       type: [{ name: String, count: Number }],
     },
-    dateOrdered: { type: Date, required: true },
-    dateCompleted: { type: Date },
+    dateOrdered: { type: String, required: true },
+    dateCompleted: { type: String },
   },
   {
     toJSON: {
@@ -20,6 +21,9 @@ const orderSchema = new Schema(
   }
 );
 
+if (models.Customer) {
+  models.Customer = Customer;
+}
 const Order = models.Order || model("Order", orderSchema);
 
 export default Order;

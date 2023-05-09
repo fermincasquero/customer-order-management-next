@@ -26,8 +26,10 @@ customerSchema.virtual("orders", {
   localField: "_id",
   foreignField: "customer",
 });
+if (models.Order) {
+  models.Order = Order;
+}
 
-models.Order = Order;
 const Customer = models.Customer || model("Customer", customerSchema);
 
 export default Customer;

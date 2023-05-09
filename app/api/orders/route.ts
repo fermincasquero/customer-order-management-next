@@ -6,7 +6,7 @@ import dbConnect from "@/lib/server/mongoose";
 export async function GET() {
   await dbConnect();
 
-  const orders = await Order.find();
+  const orders = await Order.find().populate("customer");
 
   return NextResponse.json(orders);
 }
