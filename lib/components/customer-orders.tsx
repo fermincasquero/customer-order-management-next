@@ -85,7 +85,7 @@ export default function CustomerOrders({ data }: { data: Customer }) {
       </Stack>
 
       {data?.orders?.length ? (
-        <DataGrid columns={columns} rows={data.orders} getRowId={(row) => row.id} />
+        <DataGrid columns={columns} rows={data.orders} getRowId={(row) => row.id} rowSelection={false} />
       ) : (
         <Typography mt={2}>No Orders</Typography>
       )}

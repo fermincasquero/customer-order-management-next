@@ -16,7 +16,7 @@ export default function Customers() {
         <CustomerModal />
       </Stack>
 
-      {data ? <CustomersTable items={data} /> : null}
+      {data?.length ? <CustomersTable items={data} /> : <Typography mt={2}>No Customers</Typography>}
     </Box>
   );
 }

@@ -16,7 +16,7 @@ export default function Customers() {
   const handleDelete = (id: string) => async () => {
     await Axios.delete(`/api/orders/${id}`);
 
-    mutate(["/api/orders"]);
+    mutate("/api/orders");
   };
 
   const columns: GridColDef[] = useMemo(() => {
@@ -80,7 +80,7 @@ export default function Customers() {
       </Stack>
 
       {data?.length ? (
-        <DataGrid columns={columns} rows={data} getRowId={(row) => row.id} />
+        <DataGrid columns={columns} rows={data} getRowId={(row) => row.id} rowSelection={false} />
       ) : (
         <Typography mt={2}>No Orders</Typography>
       )}

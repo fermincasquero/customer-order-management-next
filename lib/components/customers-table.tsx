@@ -52,5 +52,5 @@ export default function CustomersTable({ items }: Props) {
     ];
   }, [handleDelete]);
 
-  return <DataGrid columns={columns} rows={items} sx={{ mt: 4 }} />;
+  return <DataGrid columns={columns} rows={items} sx={{ mt: 4 }} rowSelection={false} />;
 }
