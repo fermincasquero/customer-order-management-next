@@ -86,7 +86,7 @@ export default function OrderModal({ open, onClose, customer }: Props) {
             <Stack key={index} direction="row" mt={1} gap={2}>
               <Stack flex={1} gap={1} direction="row">
                 <TextField variant="standard" value={item.name} disabled />
-                <TextField variant="standard" value={item.count} disabled />
+                <TextField variant="standard" value={item.count || 0} disabled />
               </Stack>
 
               <Button
@@ -127,7 +127,7 @@ export default function OrderModal({ open, onClose, customer }: Props) {
 
         <DialogActions>
           <Button onClick={onClose}>Cancel</Button>
-          <Button type="submit" variant="contained">
+          <Button type="submit" variant="contained" disabled={!items.length}>
             Add
           </Button>
         </DialogActions>

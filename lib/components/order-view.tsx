@@ -125,7 +125,7 @@ export default function OrderView({ data }: { data: Order }) {
           />
           <TextField
             type="number"
-            value={itemCount}
+            value={itemCount || 0}
             label="Count"
             onChange={(event) => setItemCount(parseInt(event.target.value))}
             sx={{ flex: 1 }}
@@ -143,7 +143,7 @@ export default function OrderView({ data }: { data: Order }) {
       </Stack>
 
       {isDirty && (
-        <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 4 }}>
+        <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 4 }} disabled={!items.length}>
           Update Order
         </Button>
       )}
