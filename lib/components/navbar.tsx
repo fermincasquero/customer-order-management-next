@@ -5,7 +5,7 @@ import { AppBar, Toolbar, Button } from "@/lib/mui/material";
 
 export default function Navbar() {
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar>
         <Button variant="text" sx={{ color: "white" }} component={Link} href="/customers">
           Customers

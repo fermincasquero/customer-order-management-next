@@ -75,6 +75,7 @@ export default function OrderView({ data }: { data: Order }) {
             variant="standard"
             label="Date Ordered"
             fullWidth
+            InputLabelProps={{ shrink: true }}
             sx={{ mt: 2 }}
             value={value}
             onChange={onChange}
@@ -86,6 +87,7 @@ export default function OrderView({ data }: { data: Order }) {
         variant="standard"
         label="Date Completed"
         {...register("dateCompleted")}
+        InputLabelProps={{ shrink: true }}
         fullWidth
         sx={{ mt: 2 }}
       />

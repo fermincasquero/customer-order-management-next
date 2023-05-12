@@ -37,7 +37,7 @@ export default function OrderModal({ open, onClose, customer }: Props) {
   const items = watch("items") || [];
 
   const handleAdd = async (values: any) => {
-    await Axios.post("/api/orders", values);
+    await Axios.post("/api/orders", { customer: customer?.id, ...values });
 
     if (customer) {
       mutate(["/api/customers", customer.id]);
@@ -52,26 +52,29 @@ export default function OrderModal({ open, onClose, customer }: Props) {
       <DialogTitle>Add an Order</DialogTitle>
       <form onSubmit={handleSubmit(handleAdd)}>
         <DialogContent>
-          <Controller
-            control={control}
-            name="customer"
-            render={({ field: { value, onChange } }) => (
-              <Autocomplete
-                options={data || []}
-                value={value}
-                disabled={!!customer}
-                onChange={(e, newValue) => onChange(newValue)}
-                getOptionLabel={(option) => option.username}
-                renderInput={(params) => <TextField {...params} label="Customer" variant="standard" />}
-              />
-            )}
-          />
+          {customer ? null : (
+            <Controller
+              control={control}
+              name="customer"
+              render={({ field: { value, onChange } }) => (
+                <Autocomplete
+                  options={data || []}
+                  value={value}
+                  disabled={!!customer}
+                  onChange={(e, newValue) => onChange(newValue)}
+                  getOptionLabel={(option) => option.username}
+                  renderInput={(params) => <TextField {...params} label="Customer" variant="standard" />}
+                />
+              )}
+            />
+          )}
           <TextField
             type="date"
             variant="standard"
             label="Date Ordered"
             {...register("dateOrdered")}
             fullWidth
+            InputLabelProps={{ shrink: true }}
             sx={{ mt: 2 }}
           />
           <TextField
@@ -79,6 +82,7 @@ export default function OrderModal({ open, onClose, customer }: Props) {
             variant="standard"
             label="Date Completed"
             {...register("dateCompleted")}
+            InputLabelProps={{ shrink: true }}
             fullWidth
             sx={{ mt: 2 }}
           />
